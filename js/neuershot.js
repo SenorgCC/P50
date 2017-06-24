@@ -8,6 +8,7 @@ $document.ready(function () {
         //ZUERST NEUEN SHOT HINZUFÜGEN!
         $.post('js/dbc/shot.php', sendedata, function (data) {
             data = JSON.parse(data);
+            alert(data);
         });
 
         //DANNACH SHOTBEWERTUNG ABGEBEN

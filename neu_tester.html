@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Shooters Shot Suche</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="neu_shot.html">Neuer Shot</a></li>
+            <li class="active"><a href="neu_tester.html">Neuer Tester</a></li>
+            <li><a href="#"><s>Shots Verwalten</s></a></li>
+            <li><a href="#"><s>Tester Verwalten</s></a></li>
+            <li><a href="#"><s>Shotsuche</s></a></li>
+        </ul>
+    </div>
+</nav>
+
+<form class="form-horizontal">
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="vorname">Vorname:</label>
+        <div class="col-sm-10">
+            <input type="vorname" class="form-control" id="vorname" placeholder="Max">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="nachname">Nachname:</label>
+        <div class="col-sm-10">
+            <input type="nachname" class="form-control" id="nachname" placeholder="Mustermann">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="kuerzel">Kürzel:</label>
+        <div class="col-sm-10">
+            <input type="kuerzel" class="form-control" id="kuerzel" placeholder="MMus">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label><input type="checkbox"> Aktiver Tester?</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>

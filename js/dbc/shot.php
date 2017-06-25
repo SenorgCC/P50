@@ -8,6 +8,7 @@ $conn = db2_connect($database, $user, $password);
 $name = $_POST['name'];
 $zutaten = $_POST['zutaten'];
 
+echo"$name, $zutaten";
 
 $conn_string = "DRIVER={IBM DB2 ODBC  DRIVER};DATABASE=$database;PORT=$port;HOSTNAME=$hostname;".
 "PROTOCOL=TCPIP;UID=$user;PWD=$password;";
@@ -19,9 +20,13 @@ if (!$conn) {
 	ret;
 	}
 
-$insert="INSERT into SHOOTERS.SHOTS(NAME,ZUTATEN) values ($name,$zutaten);"
-$result = db2_exec($conn, $create);
-if ($result) {
-    print "Successfully created the table.\n";
+$insert="INSERT into SHOOTERS.SHOTS(NAME,ZUTATEN) values ('".$name."','".$zutaten."');";
+$result = db2_exec($conn, $insert);
+
+if($result){
+	print "Successfully inserted!";
 }
+echo json_encode("result");
+
+$rc = db2_close($conn);
 ?>

@@ -1,4 +1,5 @@
-$document.ready(function () {
+$(document).ready(function () {
+
     $('#submit_shot').click(function () {
         var bewertung=$('input[name = "optradio"]:checked').val();
         var userID=$('#USER_ID').val();

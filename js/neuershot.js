@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    var userBewertung=[];
-    alert("test!");
+    var UserBewertungen=[];
     $.post('js/dbc/user_auswahl.php', function (data) {
         data = JSON.parse(data);
 
@@ -44,14 +43,20 @@ $(document).ready(function () {
 
         //DANNACH SHOTBEWERTUNG ABGEBEN
 
-        $('#Userliste > div > #user > label').each(function(){
-                var usertag = $(this).text();
+        $('#Userliste > #row').each(function(){
+                var usertag = $(this).find('#user>label').text();
+                
                 var userarray=usertag.split('#');
                 //userBewertung.push(userarray);
-                var inputname="optradio"+userarray[1]
+                var inputname="optradio"+userarray[1];
                 inputname = JSON.stringify(inputname);
-                var bewertung=$(this).children('input[name ='+inputname+']:checked').val();
-                alert(bewertung);
-            });
+                var Bewertung=$(this).find('input[name ='+inputname+']:checked').val();
+                var Nutzerbewertung={UserKuerzel:userarray[0],
+                                 UserID:userarray[1],
+                                 Bewertung:Bewertung};
+                UserBewertungen.push(Nutzerbewertung);
+        });
+
+        // Hier kommt die weitere logik zum eintragen der Userbewertung!
     });
 });

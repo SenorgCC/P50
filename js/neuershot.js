@@ -22,6 +22,7 @@ $(document).ready(function () {
                         +'<label class="radio-inline"><input type="radio" name="optradio'+data[0]+'" value="8">8</label>'
                         +'<label class="radio-inline"><input type="radio" name="optradio'+data[0]+'" value="9">9</label>'
                         +'<label class="radio-inline"><input type="radio" name="optradio'+data[0]+'" value="10">10</label>'
+                        +'<label class="radio-inline"><input type="radio" name="optradio'+data[0]+'" value="11"><i>Lappen</i></label>'
                     +'</div>'
                 +'</div>'
                 );
@@ -36,13 +37,13 @@ $(document).ready(function () {
         var Zutaten=$('#zutaten').val();
 
         var sendedata={name:ShotName, zutaten:Zutaten};
+        // TODO: Wieder aktivieren, sobald usershotbewertung funktioniert
         //$.post('js/dbc/shot.php', sendedata, function (data) {
         //    data = JSON.parse(data);
         //    alert(data);
         //});
 
-        //DANNACH SHOTBEWERTUNG ABGEBEN
-
+        //Datenerfassung: User-Shotbewertung
         $('#Userliste > #row').each(function(){
                 var usertag = $(this).find('#user>label').text();
                 
@@ -57,6 +58,33 @@ $(document).ready(function () {
                 UserBewertungen.push(Nutzerbewertung);
         });
 
+        //Weitergabe der Daten an die Verarbeitung der Userbewertungen
+        FilterUserRating(UserBewertungen);
+
         // Hier kommt die weitere logik zum eintragen der Userbewertung!
+
+
     });
 });
+
+var FilterUserRating=function(UserObjectArray){
+    UserObjectArray.forEach(function(UserObject){
+            if(UserObject.Bewertung!=11){
+
+            }
+        });
+};
+
+var insertIntoDB = function(UserID, ShotID, FilterUserRating){
+
+};
+
+//Shot muss noch irgendwie Bestimmt werden!
+var getShotID = function(ShotName){
+    var sendedata={name:ShotName};
+    $.post('js/dbc/getShotID.php', sendedata, function (data) {
+        data = JSON.parse(data);
+        var shotID = data;
+    });
+    return shotID;
+};

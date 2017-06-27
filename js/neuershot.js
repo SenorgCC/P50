@@ -51,12 +51,10 @@ $(document).ready(function () {
             async:false
         });*/
 
-        var ShotID=getShotID(ShotName);
-        
         //Datenerfassung: User-Shotbewertung
         $('#Userliste > #row').each(function(){
                 var usertag = $(this).find('#user>label').text();
-                
+
                 var userarray=usertag.split('#');
                 //userBewertung.push(userarray);
                 var inputname="optradio"+userarray[1];
@@ -77,21 +75,47 @@ $(document).ready(function () {
 });
 
 var FilterUserRating=function(UserObjectArray){
-    UserObjectArray.forEach(function(UserObject){
-            if(UserObject.Bewertung!=11){
-
-            }
+    var ShotName=$('#shotname').val();
+    $.when(
+        $.ajax({
+            type:'POST',
+            url:'js/dbc/getShotID.php',
+            data:{name:ShotName},
+            success:function(data){
+                data = JSON.parse(data);
+                var shotID = data;
+                return shotID;
+            },
+            async:false
+        })
+        ).then(function(ShotID){
+            UserObjectArray.forEach(function(UserObject){
+                if(UserObject.Bewertung!=11){
+                    insertIntoDB(UserObject.UserID, ShotID,UserObject.Bewertung);
+                }
+            });
         });
 };
 
-var insertIntoDB = function(UserID, ShotID, FilterUserRating){
-
+var insertIntoDB = function(UserID, ShotID, UserRating){
+    //Erstmal Checken, ob Es schon eine Bewertung zu dem Shot gibt, wenn ja: Update, sonst Insert!
+    var sendedata={ userid:UserID,
+                    shotid:ShotID,
+                    UserRating:UserRating};
+    $.ajax({
+        type:'POST',
+        url:'js/dbc/rateNewShot.php',
+        data:sendedata,
+        success:function(data){},
+        async:false
+    });
+    //Banner Anzeigen: Shot wurde bewertet
 };
 
 //Shot muss noch irgendwie Bestimmt werden!
+//Ansatz zum bestimmen der ShotID
 var getShotID = function(ShotName){
     //$.ajaxSetup({async: false});
-    alert("Shotname:"+ShotName);
     var sendedata={name:ShotName};
 
     $.ajax({

@@ -6,7 +6,7 @@ $hostname='localhost';
 $port = 60000;
 $conn = db2_connect($database, $user, $password);
 $name = $_POST['name'];
-
+$id=0;
 
 
 $conn_string = "DRIVER={IBM DB2 ODBC  DRIVER};DATABASE=$database;PORT=$port;HOSTNAME=$hostname;".
@@ -19,13 +19,14 @@ if (!$conn) {
 	ret;
 	}
 
-$select="select id from shooters.shots where name like '".$name."';";
+$select="select ID from shooters.shots where name like '".$name."';";
 $result = db2_exec($conn, $select);
 
-if($result){
-	print "Successfully inserted!";
+while($row = db2_fetch_assoc($result)){
+	$id=$row['ID'];
 }
-echo json_encode($result);
+
+echo json_encode($id);
 
 $rc = db2_close($conn);
 ?>
